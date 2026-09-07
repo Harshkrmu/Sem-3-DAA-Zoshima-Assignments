@@ -1,0 +1,64 @@
+# Recursive and Iterative Computation Analyzer
+
+def analyze_recursive_iterative(n):
+  def recursive_factorial(x):
+    if x == 0:
+      return 1
+    return x*recursive_factorial(x - 1)
+
+  def iterative_factorial(x):
+    result = 1
+    for i in range(1,x+1):
+      result *= i
+    return result
+
+  fib_count = 0
+
+  def recursive_fibonacci(x):
+    nonlocal fib_count
+    fib_count += 1
+
+    if x == 0:
+      return 0
+    if x == 1:
+      return 1
+
+    return recursive_fibonacci(x-1)+recursive_fibonacci(x-2)
+
+  def iterative_fibonacci(x):
+    if x == 0:
+      return 0
+
+
+    a = 0
+    b = 1
+
+    for i in range(2,x+1):
+      a,b = b,a+b
+
+    return b
+
+  rf = recursive_factorial(n)
+  itf = iterative_factorial(n)
+
+  rfib = recursive_fibonacci(n)
+  recursive_fib_count = fib_count
+  
+  ifib = iterative_fibonacci(n)
+
+  recursive_factorial_count = n+1
+  iterative_factorial_count = n
+  iterative_fib_count = n
+
+  return [
+    "Computation Analysis Report",
+    f"Recursive Factorial: {rf}",
+    f"Iterative Factorial: {itf}",
+    f"Recursive Fibonacci: {rfib}",
+    f"Iterative Fibonacci: {ifib}",
+    "Operation Count Comparison",
+    f"Recursive Factorial Count: {recursive_factorial_count}",
+    f"Iterative Factorial Count: {iterative_factorial_count}",
+    f"Recursive Fibonacci Count: {recursive_fib_count}",
+    f"Iterative Fibonacci Count: {iterative_fib_count}"
+  ]

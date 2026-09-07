@@ -1,0 +1,18 @@
+#  Runtime and Complexity Comparison Table
+
+def generate_runtime_complexity_table(n):
+    import math
+  
+    linear = n
+    binary = int(math.log2(n)) + 1
+    bubble = n * (n - 1) // 2
+    insertion = n * (n - 1) // 2
+
+    return [
+        "Runtime Complexity Comparison",
+        "Method ObservedCount ExpectedComplexity Observation",
+        f"Linear Search {linear} O(n) Grows linearly",
+        f"Binary Search {binary} O(log n) Grows logarithmically",
+        f"Bubble Sort {bubble} O(n^2) Grows quadratically",
+        f"Insertion Sort {insertion} O(n^2) Grows quadratically"
+    ]

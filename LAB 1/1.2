@@ -1,0 +1,47 @@
+#  Linear Search and Binary Search Comparison
+
+def compare_search_algorithms(arr, target):
+  # Linear Search
+  linear_comp = 0
+  linear_index = -1
+
+  for i in range(len(arr)):
+    linear_comp += 1
+    if arr[i] == target:
+      linear_index = i
+      break
+
+  # Binary Search
+  left = 0
+  right = len(arr) - 1
+  binary_comp = 0
+  binary_index = -1
+
+  while left <= right:
+    binary_comp += 1
+    mid = (left+right)//2
+
+    if arr[mid] == target:
+      binary_index = mid
+      right = mid -1
+    elif arr[mid] < target:
+      left = mid + 1
+    else:
+      right = mid - 1
+
+  if binary_comp > linear_comp:
+    better = "Linear Search"
+  elif linear_comp > binary_comp:
+    better = "Binary Search"
+  else:
+    better = "Both Equal"
+    
+  return ["Search Comparison Report",
+          "Linear Search",
+          f"Index: {linear_index}",
+          f"Comparisons: {linear_comp}",
+          "Binary Search",
+          f"Index: {binary_index}",
+          f"Comparisons: {binary_comp}",
+          f"Better Algorithm: {better}"
+         ]
