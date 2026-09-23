@@ -1,0 +1,94 @@
+# Merge Sort and Quick Sort for Task Prioritization
+
+def compare_merge_quick_tasks(tasks):
+  merge_comp = [0]
+  quick_comp = [0]
+
+  def compare(a,b):
+    if a[1] != b[1]:
+      return a[1] > b[1]
+    return a[0] < b[0]
+
+  def merge_sort(arr):
+    if len(arr) <= 1:
+      return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+
+    result = []
+    i = 0
+    j = 0
+
+    while i < len(left) and j < len(right):
+      merge_comp[0] += 1
+
+      if compare(left[i],right[j]):
+        result.append(left[i])
+        i += 1
+
+      else:
+        result.append(right[j])
+        j += 1
+
+    while i < len(left):
+      result.append(left[i])
+      i += 1
+    while j < len(right):
+      result.append(right[j])
+      j += 1
+
+    return result
+
+  def quick_sort(arr,low,high):
+    if low >= high:
+      return
+
+    pivot = arr[high]
+    i = low - 1
+
+    for j in range(low,high):
+      quick_comp[0] += 1
+
+      if compare(arr[j], pivot):
+        i += 1
+        arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i + 1],arr[high] = arr[high],arr[i + 1]
+
+    p = i + 1
+
+    quick_sort(arr,low,p-1)
+    quick_sort(arr,p+1,high)
+
+  merge_result = merge_sort(tasks[:])
+
+  quick_result = tasks[:]
+  quick_sort(quick_result,0,len(quick_result)-1)
+
+  if merge_comp[0] < quick_comp[0]:
+    better = "Merge Sort"
+  elif quick_comp[0] < merge_comp[0]:
+    better = "Quick Sort"
+  else:
+    better = "Both Equal"
+
+  output = []
+
+  output.append("Task Prioritization Report")
+  output.append("Merge Sort Result")
+
+  for task in merge_result:
+    output.append(task[0] + " "+str(task[1]))
+
+  output.append("Merge Comparisons: "+ str(merge_comp[0]))
+  output.append("Quick Sort Result")
+
+  for task in quick_result:
+    output.append(task[0] + " " + str(task[1]))
+
+  output.append("Quick Comparisons: "+ str(quick_comp[0]))
+  output.append("Better Algorithm: "+ better)
+    
+  return output

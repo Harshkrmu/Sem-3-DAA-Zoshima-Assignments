@@ -1,0 +1,53 @@
+# Fractional Knapsack for Optimal Resource Allocation
+
+def fractional_knapsack_allocation(items, capacity):
+    items.sort(key=lambda x: (-x[1] / x[2], x[0]))
+
+    selected = []
+    total_profit = 0
+    total_weight = 0
+    remaining = capacity
+
+    for item in items:
+        item_id = item[0]
+        value = item[1]
+        weight = item[2]
+
+        if remaining <= 0:
+            break
+
+        if weight <= remaining:
+            fraction = 1
+            used_weight = weight
+            profit = value
+        else:
+            fraction = remaining / weight
+            used_weight = remaining
+            profit = value * fraction
+
+        selected.append((item_id, value, weight, fraction, profit))
+
+        total_profit += profit
+        total_weight += used_weight
+        remaining -= used_weight
+
+    result = []
+
+    result.append("Fractional Knapsack Report")
+    result.append("Selected Items")
+    result.append("Item Value Weight Fraction Profit")
+
+    for item in selected:
+        result.append(
+            str(item[0]) + " " +
+            format(item[1], ".2f") + " " +
+            format(item[2], ".2f") + " " +
+            format(item[3], ".2f") + " " +
+            format(item[4], ".2f")
+        )
+
+    result.append("Maximum Profit: " + format(total_profit, ".2f"))
+    result.append("Total Weight Used: " + format(total_weight, ".2f"))
+    result.append("Selection Strategy: Highest value-to-weight ratio first")
+
+    return result
