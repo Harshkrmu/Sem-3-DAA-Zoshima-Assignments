@@ -1,0 +1,36 @@
+# Optimization Technique Reflection Report
+
+def generate_optimization_reflection_report(scenarios):
+    report = []
+
+    report.append("Optimization Technique Reflection Report")
+    report.append("Technique Comparison")
+    report.append("Technique BestUsedFor Limitation Example")
+    report.append("Divide-and-Conquer Large independent subproblems Extra merging or partition overhead Merge Sort and Quick Sort")
+    report.append("Greedy Locally optimal choices May not always give global optimum Activity Selection and Fractional Knapsack")
+    report.append("Dynamic Programming Overlapping subproblems Requires more memory 0/1 Knapsack and LCS")
+
+    report.append("Scenario Recommendations")
+    report.append("Scenario Technique Reason")
+
+    for scenario in scenarios:
+        if scenario == "TASK_SORTING":
+            report.append("TASK_SORTING Divide-and-Conquer Problem can be divided and combined")
+        elif scenario == "MEETING_SCHEDULE":
+            report.append("MEETING_SCHEDULE Greedy Earliest finish time maximizes compatible activities")
+        elif scenario == "RESOURCE_FRACTION":
+            report.append("RESOURCE_FRACTION Greedy Highest ratio choice gives optimal fractional result")
+        elif scenario == "JOB_PROFIT":
+            report.append("JOB_PROFIT Greedy Highest profit job is placed before deadline")
+        elif scenario == "ZERO_ONE_KNAPSACK":
+            report.append("ZERO_ONE_KNAPSACK Dynamic Programming Complete item choices require optimal subproblem table")
+        elif scenario == "SEQUENCE_MATCHING":
+            report.append("SEQUENCE_MATCHING Dynamic Programming Overlapping subsequences are reused")
+
+    report.append("Summary")
+    report.append("Most Reliable for Exact Optimization: Dynamic Programming")
+    report.append("Fastest for Simple Scheduling Decisions: Greedy")
+    report.append("Best for Sorting Large Data: Divide-and-Conquer")
+    report.append("Conclusion: Algorithm choice depends on problem structure and constraints")
+
+    return report

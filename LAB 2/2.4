@@ -1,0 +1,41 @@
+# Smart Resource Allocation & Optimization System
+
+def job_sequencing_deadlines(jobs):
+    jobs.sort(key=lambda x: x[2], reverse=True)
+
+    max_deadline = 0
+    for job in jobs:
+        if job[1] > max_deadline:
+            max_deadline = job[1]
+
+    slots = [None] * (max_deadline + 1)
+    total_profit = 0
+    count = 0
+
+    for job in jobs:
+        job_id = job[0]
+        deadline = job[1]
+        profit = job[2]
+
+        for i in range(deadline, 0, -1):
+            if slots[i] is None:
+                slots[i] = job
+                total_profit += profit
+                count += 1
+                break
+
+    result = []
+
+    result.append("Job Sequencing Report")
+    result.append("Scheduled Jobs")
+    result.append("Slot Job Profit")
+
+    for i in range(1, len(slots)):
+        if slots[i] is not None:
+            result.append(str(i) + " " + str(slots[i][0]) + " " + str(slots[i][2]))
+
+    result.append("Total Jobs Scheduled: " + str(count))
+    result.append("Total Profit: " + str(total_profit))
+    result.append("Strategy: Schedule highest profit jobs before their deadlines")
+
+    return result
